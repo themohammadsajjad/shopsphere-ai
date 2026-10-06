@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# keep the environment template in Git
+!.env.example
+
+# Playwright generated artifacts
+/playwright-report/
+/test-results/
