@@ -43,6 +43,13 @@ export const productQueryKeys = {
   categories: () =>
     [...productQueryKeys.all, "categories"] as const,
 
+  suggestions: (search: string) =>
+    [
+      ...productQueryKeys.all,
+      "suggestions",
+      search.trim(),
+    ] as const,
+
   details: () =>
     [...productQueryKeys.all, "detail"] as const,
 
@@ -62,10 +69,13 @@ export function useProductsQuery(
   });
 }
 
-export function useProductCategoriesQuery() {
+export function useProductCategoriesQuery(
+  enabled = true,
+) {
   return useQuery({
     queryKey: productQueryKeys.categories(),
     queryFn: getProductCategories,
+    enabled,
   });
 }
 
@@ -74,5 +84,25 @@ export function useProductQuery(id: number) {
     queryKey: productQueryKeys.detail(id),
     queryFn: () => getProductById(id),
     enabled: Number.isInteger(id) && id > 0,
+  });
+}
+
+export function useProductSuggestionsQuery(
+  search: string,
+) {
+  const normalizedSearch = search.trim();
+
+  return useQuery({
+    queryKey:
+      productQueryKeys.suggestions(
+        normalizedSearch,
+      ),
+    queryFn: () =>
+      getProducts({
+        search: normalizedSearch,
+        limit: 5,
+        skip: 0,
+      }),
+    enabled: normalizedSearch.length > 0,
   });
 }

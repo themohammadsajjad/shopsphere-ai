@@ -25,6 +25,7 @@ import {
   productQueryKeys,
   useProductCategoriesQuery,
   useProductQuery,
+  useProductSuggestionsQuery,
   useProductsQuery,
 } from "./queries";
 
@@ -169,4 +170,64 @@ describe("product query hooks", () => {
     expect(result.current.fetchStatus).toBe("idle");
     expect(getProductById).not.toHaveBeenCalled();
   });
+
+  it("loads up to five product suggestions for a trimmed search", async () => {
+    vi.mocked(getProducts).mockResolvedValue({
+      products: [],
+      total: 0,
+      skip: 0,
+      limit: 5,
+    });
+
+    const { result } = renderHook(
+      () =>
+        useProductSuggestionsQuery(
+          "  laptop  ",
+        ),
+      {
+        wrapper: createWrapper(),
+      },
+    );
+
+    await waitFor(() => {
+      expect(result.current.isSuccess).toBe(true);
+    });
+
+    expect(getProducts).toHaveBeenCalledWith({
+      search: "laptop",
+      limit: 5,
+      skip: 0,
+    });
+
+    expect(result.current.data?.limit).toBe(5);
+  });
+
+  it("does not request suggestions for an empty search", () => {
+    const { result } = renderHook(
+      () =>
+        useProductSuggestionsQuery("   "),
+      {
+        wrapper: createWrapper(),
+      },
+    );
+
+    expect(result.current.fetchStatus).toBe("idle");
+    expect(getProducts).not.toHaveBeenCalled();
+  });
+
+
+  it("does not request categories when the query is disabled", () => {
+    const { result } = renderHook(
+      () => useProductCategoriesQuery(false),
+      {
+        wrapper: createWrapper(),
+      },
+    );
+
+    expect(result.current.fetchStatus).toBe("idle");
+    expect(
+      getProductCategories,
+    ).not.toHaveBeenCalled();
+  });
+
 });
