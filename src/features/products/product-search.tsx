@@ -2,6 +2,7 @@
 
 import {
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -13,11 +14,19 @@ type ProductSearchProps = {
   onSearchChange: (search?: string) => void;
 };
 
+function normalizeSearch(value: string) {
+  return value.trim() || undefined;
+}
+
 export function ProductSearch({
   initialValue = "",
   onSearchChange,
 }: ProductSearchProps) {
   const [search, setSearch] = useState(initialValue);
+
+  const lastEmittedSearch = useRef<
+    string | undefined
+  >(normalizeSearch(initialValue));
 
   const debouncedSearch = useDebouncedValue(
     search,
@@ -26,7 +35,17 @@ export function ProductSearch({
 
   useEffect(() => {
     const normalizedSearch =
-      debouncedSearch.trim() || undefined;
+      normalizeSearch(debouncedSearch);
+
+    if (
+      normalizedSearch ===
+      lastEmittedSearch.current
+    ) {
+      return;
+    }
+
+    lastEmittedSearch.current =
+      normalizedSearch;
 
     onSearchChange(normalizedSearch);
   }, [debouncedSearch, onSearchChange]);

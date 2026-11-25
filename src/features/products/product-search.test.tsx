@@ -127,6 +127,7 @@ describe("ProductSearch", () => {
 
     render(
       <ProductSearch
+        key="phone"
         initialValue="phone"
         onSearchChange={onSearchChange}
       />,
@@ -155,7 +156,38 @@ describe("ProductSearch", () => {
     );
   });
 
-  it("treats whitespace-only input as an empty search", () => {
+  it("uses a new initial value when remounted", () => {
+    const onSearchChange = vi.fn();
+
+    const { rerender } = render(
+      <ProductSearch
+        initialValue="phone"
+        onSearchChange={onSearchChange}
+      />,
+    );
+
+    expect(
+      screen.getByRole("searchbox", {
+        name: "Search products",
+      }),
+    ).toHaveValue("phone");
+
+    rerender(
+      <ProductSearch
+        key="laptop"
+        initialValue="laptop"
+        onSearchChange={onSearchChange}
+      />,
+    );
+
+    expect(
+      screen.getByRole("searchbox", {
+        name: "Search products",
+      }),
+    ).toHaveValue("laptop");
+  });
+
+  it("does not emit a redundant empty search for whitespace-only input", () => {
     const onSearchChange = vi.fn();
 
     render(
@@ -181,8 +213,6 @@ describe("ProductSearch", () => {
       vi.advanceTimersByTime(350);
     });
 
-    expect(onSearchChange).toHaveBeenCalledWith(
-      undefined,
-    );
+    expect(onSearchChange).not.toHaveBeenCalled();
   });
 });
