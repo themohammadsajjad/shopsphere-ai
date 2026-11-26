@@ -73,3 +73,17 @@ export interface ProductListParams {
   category?: string;
   search?: string;
 }
+
+export type ProductAvailabilityFilter =
+  | "in-stock"
+  | "out-of-stock";
+
+export interface ProductFilters {
+  minPrice?: number;
+  maxPrice?: number;
+  minRating?: number;
+  availability?: ProductAvailabilityFilter;
+  onSale?: boolean;
+  brands: string[];
+  categories: string[];
+}

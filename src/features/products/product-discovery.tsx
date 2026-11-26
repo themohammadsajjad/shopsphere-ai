@@ -11,14 +11,16 @@ import {
 } from "next/navigation";
 
 import { CategoryFilter } from "@/features/products/category-filter";
-import { ProductResults } from "@/features/products/product-results";
+import { FilteredProductResults } from "@/features/products/filtered-product-results";
 import { ProductSearch } from "@/features/products/product-search";
 import { ProductSort } from "@/features/products/product-sort";
 import {
   createProductDiscoveryParams,
   parseProductDiscoveryState,
+  parseProductFilters,
   type ProductDiscoveryState,
 } from "@/features/products/url-state";
+import type { ProductFilters } from "@/types/product";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -37,14 +39,27 @@ export function ProductDiscovery() {
     [searchParams],
   );
 
+  const filters = useMemo(
+    () =>
+      parseProductFilters(
+        new URLSearchParams(
+          searchParams.toString(),
+        ),
+      ),
+    [searchParams],
+  );
+
   const updateUrl = useCallback(
     (
       nextState: ProductDiscoveryState,
       mode: "push" | "replace" = "push",
+      nextFilters: ProductFilters =
+        filters,
     ) => {
       const params =
         createProductDiscoveryParams(
           nextState,
+          nextFilters,
         );
 
       const query = params.toString();
@@ -76,6 +91,7 @@ export function ProductDiscovery() {
       });
     },
     [
+      filters,
       pathname,
       router,
       searchParams,
@@ -99,22 +115,27 @@ export function ProductDiscovery() {
     [state, updateUrl],
   );
 
-  const handleCategoryChange = useCallback(
-    (category?: string) => {
-      updateUrl({
-        ...state,
-        search: undefined,
-        category,
-        page: 1,
-      });
-    },
-    [state, updateUrl],
-  );
+  const handleCategoryChange =
+    useCallback(
+      (category?: string) => {
+        updateUrl({
+          ...state,
+          search: undefined,
+          category,
+          page: 1,
+        });
+      },
+      [state, updateUrl],
+    );
 
   const handleSortChange = useCallback(
     (
-      sortBy: ProductDiscoveryState["sortBy"],
-      order: ProductDiscoveryState["order"],
+      sortBy:
+        | ProductDiscoveryState["sortBy"]
+        | undefined,
+      order:
+        | ProductDiscoveryState["order"]
+        | undefined,
     ) => {
       updateUrl({
         ...state,
@@ -125,6 +146,21 @@ export function ProductDiscovery() {
     },
     [state, updateUrl],
   );
+
+  const handleFiltersChange =
+    useCallback(
+      (nextFilters: ProductFilters) => {
+        updateUrl(
+          {
+            ...state,
+            page: 1,
+          },
+          "push",
+          nextFilters,
+        );
+      },
+      [state, updateUrl],
+    );
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -137,10 +173,6 @@ export function ProductDiscovery() {
   );
 
   const productParams = {
-    limit: PRODUCTS_PER_PAGE,
-    skip:
-      (state.page - 1) *
-      PRODUCTS_PER_PAGE,
     search: state.search,
     category: state.category,
     sortBy: state.sortBy,
@@ -153,7 +185,9 @@ export function ProductDiscovery() {
         <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
           <ProductSearch
             key={state.search ?? ""}
-            initialValue={state.search ?? ""}
+            initialValue={
+              state.search ?? ""
+            }
             onSearchChange={
               handleSearchChange
             }
@@ -180,8 +214,14 @@ export function ProductDiscovery() {
         </div>
       </div>
 
-      <ProductResults
+      <FilteredProductResults
         params={productParams}
+        filters={filters}
+        page={state.page}
+        limit={PRODUCTS_PER_PAGE}
+        onFiltersChange={
+          handleFiltersChange
+        }
         onPageChange={
           handlePageChange
         }

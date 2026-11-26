@@ -1,4 +1,7 @@
+import { normalizeProductFilters } from "@/features/products/product-filters";
 import type {
+  ProductAvailabilityFilter,
+  ProductFilters,
   ProductSortField,
   SortOrder,
 } from "@/types/product";
@@ -44,6 +47,42 @@ function parsePage(value: string | null) {
     : 1;
 }
 
+function parseNonNegativeNumber(
+  value: string | null,
+) {
+  if (!value) {
+    return undefined;
+  }
+
+  const parsedValue = Number(value);
+
+  return Number.isFinite(parsedValue) &&
+    parsedValue >= 0
+    ? parsedValue
+    : undefined;
+}
+
+function parseRating(value: string | null) {
+  const rating = parseNonNegativeNumber(value);
+
+  return rating !== undefined &&
+    rating <= 5
+    ? rating
+    : undefined;
+}
+
+function getUniqueValues(
+  values: string[],
+) {
+  return [
+    ...new Set(
+      values
+        .map((value) => value.trim())
+        .filter(Boolean),
+    ),
+  ];
+}
+
 export function parseProductDiscoveryState(
   searchParams: URLSearchParams,
 ): ProductDiscoveryState {
@@ -55,10 +94,15 @@ export function parseProductDiscoveryState(
     : searchParams.get("category")?.trim() ||
       undefined;
 
-  const sortByValue = searchParams.get("sortBy");
-  const orderValue = searchParams.get("order");
+  const sortByValue =
+    searchParams.get("sortBy");
 
-  const sortBy = isProductSortField(sortByValue)
+  const orderValue =
+    searchParams.get("order");
+
+  const sortBy = isProductSortField(
+    sortByValue,
+  )
     ? sortByValue
     : undefined;
 
@@ -74,12 +118,55 @@ export function parseProductDiscoveryState(
     category,
     sortBy,
     order,
-    page: parsePage(searchParams.get("page")),
+    page: parsePage(
+      searchParams.get("page"),
+    ),
   };
+}
+
+export function parseProductFilters(
+  searchParams: URLSearchParams,
+): ProductFilters {
+  const availabilityValue =
+    searchParams.get("availability");
+
+  const availability:
+    | ProductAvailabilityFilter
+    | undefined =
+    availabilityValue === "in-stock" ||
+    availabilityValue === "out-of-stock"
+      ? availabilityValue
+      : undefined;
+
+  return normalizeProductFilters({
+    minPrice: parseNonNegativeNumber(
+      searchParams.get("minPrice"),
+    ),
+    maxPrice: parseNonNegativeNumber(
+      searchParams.get("maxPrice"),
+    ),
+    minRating: parseRating(
+      searchParams.get("minRating"),
+    ),
+    availability,
+    onSale:
+      searchParams.get("sale") === "1"
+        ? true
+        : undefined,
+    brands: getUniqueValues(
+      searchParams.getAll("brand"),
+    ),
+    categories: getUniqueValues(
+      searchParams.getAll(
+        "filterCategory",
+      ),
+    ),
+  });
 }
 
 export function createProductDiscoveryParams(
   state: ProductDiscoveryState,
+  filters?: ProductFilters,
 ) {
   const params = new URLSearchParams();
 
@@ -102,6 +189,58 @@ export function createProductDiscoveryParams(
 
   if (state.page > 1) {
     params.set("page", String(state.page));
+  }
+
+  if (filters) {
+    const normalized =
+      normalizeProductFilters(filters);
+
+    if (normalized.minPrice !== undefined) {
+      params.set(
+        "minPrice",
+        String(normalized.minPrice),
+      );
+    }
+
+    if (normalized.maxPrice !== undefined) {
+      params.set(
+        "maxPrice",
+        String(normalized.maxPrice),
+      );
+    }
+
+    if (
+      normalized.minRating !== undefined
+    ) {
+      params.set(
+        "minRating",
+        String(normalized.minRating),
+      );
+    }
+
+    if (normalized.availability) {
+      params.set(
+        "availability",
+        normalized.availability,
+      );
+    }
+
+    if (normalized.onSale) {
+      params.set("sale", "1");
+    }
+
+    normalized.brands.forEach((brand) => {
+      params.append("brand", brand);
+    });
+
+    normalized.categories.forEach(
+      (category) => {
+        params.append(
+          "filterCategory",
+          category,
+        );
+      },
+    );
   }
 
   return params;
