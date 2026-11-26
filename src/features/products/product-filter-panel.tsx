@@ -173,7 +173,7 @@ export function ProductFilterPanel({
 
           <div className="mt-3 grid grid-cols-2 gap-3">
             <label className="text-xs text-muted-foreground">
-              Minimum
+              Minimum (₹)
               <input
                 type="number"
                 min="0"
@@ -191,7 +191,7 @@ export function ProductFilterPanel({
             </label>
 
             <label className="text-xs text-muted-foreground">
-              Maximum
+              Maximum (₹)
               <input
                 type="number"
                 min="0"

@@ -77,7 +77,7 @@ describe("ProductCard", () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText("$9.99"),
+      screen.getByText("₹9.99"),
     ).toBeInTheDocument();
 
     expect(

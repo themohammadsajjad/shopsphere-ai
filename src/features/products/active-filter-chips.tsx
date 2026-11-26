@@ -5,6 +5,7 @@ import type {
   ProductCategory,
   ProductFilters,
 } from "@/types/product";
+import { formatInr } from "@/utils/currency";
 
 type ActiveFilterChipsProps = {
   filters: ProductFilters;
@@ -48,7 +49,7 @@ export function ActiveFilterChips({
   if (filters.minPrice !== undefined) {
     chips.push({
       key: "min-price",
-      label: `Min $${filters.minPrice}`,
+      label: `Min ${formatInr(filters.minPrice)}`,
       remove: () =>
         onFiltersChange({
           ...filters,
@@ -60,7 +61,7 @@ export function ActiveFilterChips({
   if (filters.maxPrice !== undefined) {
     chips.push({
       key: "max-price",
-      label: `Max $${filters.maxPrice}`,
+      label: `Max ${formatInr(filters.maxPrice)}`,
       remove: () =>
         onFiltersChange({
           ...filters,

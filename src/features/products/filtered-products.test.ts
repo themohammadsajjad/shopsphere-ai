@@ -144,3 +144,70 @@ describe("getFilteredProductsPage", () => {
     expect(result.total).toBe(2);
   });
 });
+
+describe("filtered product sorting", () => {
+  it("sorts price low to high before pagination", () => {
+    const products = [
+      createProduct(1, {
+        price: 300,
+      }),
+      createProduct(2, {
+        price: 100,
+      }),
+      createProduct(3, {
+        price: 200,
+      }),
+    ];
+
+    const result =
+      getFilteredProductsPage({
+        products,
+        filters: createFilters(),
+        page: 1,
+        limit: 3,
+        sortBy: "price",
+        order: "asc",
+      });
+
+    expect(
+      result.products.map(
+        (product) => product.id,
+      ),
+    ).toEqual([2, 3, 1]);
+  });
+
+  it("sorts newest products first", () => {
+    const products = [
+      createProduct(1, {
+        meta: {
+          ...createProduct(1).meta,
+          createdAt:
+            "2025-01-01T00:00:00.000Z",
+        },
+      }),
+      createProduct(2, {
+        meta: {
+          ...createProduct(2).meta,
+          createdAt:
+            "2026-01-01T00:00:00.000Z",
+        },
+      }),
+    ];
+
+    const result =
+      getFilteredProductsPage({
+        products,
+        filters: createFilters(),
+        page: 1,
+        limit: 2,
+        sortBy: "createdAt",
+        order: "desc",
+      });
+
+    expect(
+      result.products.map(
+        (product) => product.id,
+      ),
+    ).toEqual([2, 1]);
+  });
+});

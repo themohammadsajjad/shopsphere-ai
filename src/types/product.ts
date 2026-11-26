@@ -61,7 +61,8 @@ export type ProductSortField =
   | "title"
   | "price"
   | "rating"
-  | "discountPercentage";
+  | "discountPercentage"
+  | "createdAt";
 
 export type SortOrder = "asc" | "desc";
 

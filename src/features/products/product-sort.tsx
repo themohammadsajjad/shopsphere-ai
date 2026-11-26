@@ -19,6 +19,7 @@ type SortValue =
   | "price-asc"
   | "price-desc"
   | "rating-desc"
+  | "newest"
   | "discount-desc"
   | "title-asc";
 
@@ -30,16 +31,32 @@ function getSortValue(
     return "default";
   }
 
-  if (sortBy === "price" && order === "asc") {
+  if (
+    sortBy === "price" &&
+    order === "asc"
+  ) {
     return "price-asc";
   }
 
-  if (sortBy === "price" && order === "desc") {
+  if (
+    sortBy === "price" &&
+    order === "desc"
+  ) {
     return "price-desc";
   }
 
-  if (sortBy === "rating" && order === "desc") {
+  if (
+    sortBy === "rating" &&
+    order === "desc"
+  ) {
     return "rating-desc";
+  }
+
+  if (
+    sortBy === "createdAt" &&
+    order === "desc"
+  ) {
+    return "newest";
   }
 
   if (
@@ -49,7 +66,10 @@ function getSortValue(
     return "discount-desc";
   }
 
-  if (sortBy === "title" && order === "asc") {
+  if (
+    sortBy === "title" &&
+    order === "asc"
+  ) {
     return "title-asc";
   }
 
@@ -61,12 +81,16 @@ export function ProductSort({
   order,
   onSortChange,
 }: ProductSortProps) {
-  const value = getSortValue(sortBy, order);
+  const value = getSortValue(
+    sortBy,
+    order,
+  );
 
   function handleChange(
     event: React.ChangeEvent<HTMLSelectElement>,
   ) {
-    const nextValue = event.target.value as SortValue;
+    const nextValue =
+      event.target.value as SortValue;
 
     switch (nextValue) {
       case "price-asc":
@@ -81,6 +105,10 @@ export function ProductSort({
         onSortChange("rating", "desc");
         break;
 
+      case "newest":
+        onSortChange("createdAt", "desc");
+        break;
+
       case "discount-desc":
         onSortChange(
           "discountPercentage",
@@ -93,7 +121,10 @@ export function ProductSort({
         break;
 
       default:
-        onSortChange(undefined, undefined);
+        onSortChange(
+          undefined,
+          undefined,
+        );
     }
   }
 
@@ -114,7 +145,7 @@ export function ProductSort({
         className="h-10 w-full rounded-xl border bg-background/70 px-3 text-sm outline-none transition focus:border-foreground sm:w-52"
       >
         <option value="default">
-          Recommended
+          Relevance
         </option>
 
         <option value="price-asc">
@@ -127,6 +158,10 @@ export function ProductSort({
 
         <option value="rating-desc">
           Rating: High to low
+        </option>
+
+        <option value="newest">
+          Newest
         </option>
 
         <option value="discount-desc">

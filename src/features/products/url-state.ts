@@ -19,6 +19,7 @@ const PRODUCT_SORT_FIELDS: ProductSortField[] = [
   "price",
   "rating",
   "discountPercentage",
+  "createdAt",
 ];
 
 function isProductSortField(

@@ -64,7 +64,8 @@ export function FilteredProductResults({
   onPageChange,
 }: FilteredProductResultsProps) {
   const productsQuery = useProductsQuery({
-    ...params,
+    search: params.search,
+    category: params.category,
     limit: 0,
     skip: 0,
   });
@@ -143,6 +144,8 @@ export function FilteredProductResults({
       filters,
       page,
       limit,
+      sortBy: params.sortBy,
+      order: params.order,
     });
 
   const activeFilterCount =

@@ -70,7 +70,7 @@ describe("ProductFilterPanel", () => {
     );
 
     fireEvent.change(
-      screen.getByLabelText("Minimum"),
+      screen.getByLabelText(/^Minimum \(₹\)$/),
       {
         target: {
           value: "100",
@@ -85,7 +85,7 @@ describe("ProductFilterPanel", () => {
     );
 
     fireEvent.change(
-      screen.getByLabelText("Maximum"),
+      screen.getByLabelText(/^Maximum \(₹\)$/),
       {
         target: {
           value: "500",

@@ -95,6 +95,34 @@ describe("ProductSort", () => {
     );
   });
 
+  it("sorts by newest", () => {
+    const onSortChange = vi.fn();
+
+    render(
+      <ProductSort
+        onSortChange={onSortChange}
+      />,
+    );
+
+    fireEvent.change(
+      screen.getByRole("combobox", {
+        name: "Sort products",
+      }),
+      {
+        target: {
+          value: "newest",
+        },
+      },
+    );
+
+    expect(
+      onSortChange,
+    ).toHaveBeenCalledWith(
+      "createdAt",
+      "desc",
+    );
+  });
+
   it("sorts by biggest discount", () => {
     const onSortChange = vi.fn();
 

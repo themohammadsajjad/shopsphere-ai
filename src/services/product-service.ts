@@ -4,6 +4,7 @@ import type {
   ProductListParams,
   ProductsResponse,
 } from "@/types/product";
+import { convertUsdToInr } from "@/utils/currency";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://dummyjson.com";
@@ -74,10 +75,33 @@ async function requestJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+function normalizeProductPrice(
+  product: Product,
+): Product {
+  if (typeof product.price !== "number") {
+    return product;
+  }
+
+  return {
+    ...product,
+    price: convertUsdToInr(product.price),
+  };
+}
+
 export async function getProducts(
   params: ProductListParams = {},
 ): Promise<ProductsResponse> {
-  return requestJson<ProductsResponse>(buildProductsUrl(params));
+  const response =
+    await requestJson<ProductsResponse>(
+      buildProductsUrl(params),
+    );
+
+  return {
+    ...response,
+    products: response.products.map(
+      normalizeProductPrice,
+    ),
+  };
 }
 
 export async function getProductById(id: number): Promise<Product> {
@@ -85,9 +109,12 @@ export async function getProductById(id: number): Promise<Product> {
     throw new ProductServiceError("Invalid product ID.");
   }
 
-  return requestJson<Product>(
-    `${API_BASE_URL}/products/${encodeURIComponent(String(id))}`,
-  );
+  const product =
+    await requestJson<Product>(
+      `${API_BASE_URL}/products/${encodeURIComponent(String(id))}`,
+    );
+
+  return normalizeProductPrice(product);
 }
 
 export async function getProductCategories(): Promise<ProductCategory[]> {
