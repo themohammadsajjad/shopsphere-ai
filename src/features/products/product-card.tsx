@@ -4,6 +4,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { useWishlistStore } from "@/store/wishlist-store";
@@ -125,7 +126,12 @@ export function ProductCard({
           </p>
 
           <h2 className="mt-2 line-clamp-2 text-sm font-semibold tracking-tight sm:text-lg">
-            {product.title}
+            <Link
+              href={`/products/${product.id}`}
+              className="hover:underline"
+            >
+              {product.title}
+            </Link>
           </h2>
 
           {product.brand ? (
