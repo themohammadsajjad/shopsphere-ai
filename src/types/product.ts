@@ -12,6 +12,12 @@ export interface ProductReview {
   reviewerEmail: string;
 }
 
+export interface ProductVariant {
+  id: string;
+  label: string;
+  stock: number;
+}
+
 export interface ProductMeta {
   createdAt: string;
   updatedAt: string;
