@@ -1,5 +1,7 @@
 import { Suspense } from "react";
+import Link from "next/link";
 
+import { buttonVariants } from "@/components/ui/button";
 import { ProductDiscovery } from "@/features/products/product-discovery";
 
 function ProductDiscoveryFallback() {
@@ -40,6 +42,26 @@ export default function ProductsPage() {
             Search, filter, sort, and explore products with a responsive
             discovery experience.
           </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            <Link
+              href="/wishlist"
+              className={buttonVariants({
+                variant: "outline",
+              })}
+            >
+              Wishlist
+            </Link>
+
+            <Link
+              href="/cart"
+              className={buttonVariants({
+                variant: "outline",
+              })}
+            >
+              Cart
+            </Link>
+          </div>
         </div>
 
         <Suspense fallback={<ProductDiscoveryFallback />}>

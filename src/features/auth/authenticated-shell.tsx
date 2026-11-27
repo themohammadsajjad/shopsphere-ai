@@ -63,6 +63,36 @@ export function AuthenticatedShell({
             </Link>
 
             <Link
+              href="/products"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })}
+            >
+              Products
+            </Link>
+
+            <Link
+              href="/cart"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })}
+            >
+              Cart
+            </Link>
+
+            <Link
+              href="/wishlist"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })}
+            >
+              Wishlist
+            </Link>
+
+            <Link
               href="/orders"
               className={buttonVariants({
                 variant: "ghost",

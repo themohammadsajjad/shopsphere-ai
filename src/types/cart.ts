@@ -20,3 +20,9 @@ export interface AddCartItemInput {
   variantId?: string;
   variantLabel?: string;
 }
+
+export type CartCoupon = {
+  code: string;
+  type: "percentage" | "fixed";
+  value: number;
+};
