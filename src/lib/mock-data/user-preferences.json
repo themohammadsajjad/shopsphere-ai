@@ -1,1 +1,16 @@
-{}
+{
+  "preferredCategories": [
+    "smartphones",
+    "mobile-accessories"
+  ],
+  "typicalPriceBand": {
+    "min": 1500,
+    "max": 6000
+  },
+  "preferredBrands": [],
+  "recentSearches": [
+    "headphones",
+    "smartphones"
+  ],
+  "source": "local-derived-signals"
+}

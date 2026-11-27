@@ -2,6 +2,9 @@
 
 import {
   type FormEvent,
+  type KeyboardEvent,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -18,6 +21,15 @@ function createMessageId() {
 }
 
 export function AiAssistant() {
+  const triggerRef =
+    useRef<HTMLButtonElement>(null);
+
+  const dialogRef =
+    useRef<HTMLElement>(null);
+
+  const inputRef =
+    useRef<HTMLInputElement>(null);
+
   const [open, setOpen] =
     useState(false);
 
@@ -56,6 +68,77 @@ export function AiAssistant() {
       (state) =>
         state.clearConversation,
     );
+
+  useEffect(() => {
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, [open]);
+
+  function closeAssistant() {
+    setOpen(false);
+
+    requestAnimationFrame(
+      () =>
+        triggerRef.current?.focus(),
+    );
+  }
+
+  function handleDialogKeyDown(
+    event:
+      KeyboardEvent<HTMLElement>,
+  ) {
+    if (
+      event.key ===
+      "Escape"
+    ) {
+      event.preventDefault();
+      closeAssistant();
+      return;
+    }
+
+    if (
+      event.key !== "Tab"
+    ) {
+      return;
+    }
+
+    const focusable =
+      dialogRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), a[href]',
+      );
+
+    if (
+      !focusable ||
+      focusable.length === 0
+    ) {
+      return;
+    }
+
+    const first =
+      focusable[0];
+
+    const last =
+      focusable[
+        focusable.length - 1
+      ];
+
+    if (
+      event.shiftKey &&
+      document.activeElement ===
+        first
+    ) {
+      event.preventDefault();
+      last.focus();
+    } else if (
+      !event.shiftKey &&
+      document.activeElement ===
+        last
+    ) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 
   async function send(
     value: string,
@@ -130,16 +213,16 @@ export function AiAssistant() {
   return (
     <>
       <Button
+        ref={triggerRef}
         type="button"
         size="lg"
         className="fixed bottom-5 right-5 z-40 rounded-full shadow-lg"
         aria-expanded={open}
         aria-controls="shopsphere-ai-assistant"
         onClick={() =>
-          setOpen(
-            (current) =>
-              !current,
-          )
+          open
+            ? closeAssistant()
+            : setOpen(true)
         }
       >
         {open
@@ -149,9 +232,14 @@ export function AiAssistant() {
 
       {open ? (
         <section
+          ref={dialogRef}
           id="shopsphere-ai-assistant"
           role="dialog"
+          aria-modal="true"
           aria-label="AI Shopping Assistant"
+          onKeyDown={
+            handleDialogKeyDown
+          }
           className="fixed inset-x-3 bottom-20 z-50 flex max-h-[78vh] flex-col overflow-hidden rounded-3xl border bg-background shadow-2xl sm:left-auto sm:right-5 sm:w-[30rem]"
         >
           <header className="border-b p-4">
@@ -169,19 +257,32 @@ export function AiAssistant() {
                 </p>
               </div>
 
-              {messages.length >
-              0 ? (
+              <div className="flex gap-1">
+                {messages.length >
+                0 ? (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    onClick={
+                      clearConversation
+                    }
+                  >
+                    Clear
+                  </Button>
+                ) : null}
+
                 <Button
                   type="button"
                   size="sm"
-                  variant="ghost"
+                  variant="outline"
                   onClick={
-                    clearConversation
+                    closeAssistant
                   }
                 >
-                  Clear
+                  Close
                 </Button>
-              ) : null}
+              </div>
             </div>
           </header>
 
@@ -330,6 +431,7 @@ export function AiAssistant() {
 
             <div className="flex gap-2">
               <input
+                ref={inputRef}
                 id="assistant-input"
                 value={input}
                 onChange={(

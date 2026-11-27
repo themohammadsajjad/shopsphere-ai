@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { FeaturedProducts } from "@/features/home/featured-products";
+import { HomeHeader } from "@/features/home/home-header";
 import { HomeRecommendations } from "@/features/recommendations/home-recommendations";
 
 const categories = [
@@ -25,62 +27,7 @@ const categories = [
 export default function Home() {
   return (
     <main className="shopsphere-grid min-h-screen">
-      <header className="border-b bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="mr-auto text-lg font-semibold"
-          >
-            ShopSphere AI
-          </Link>
-
-          <nav
-            aria-label="Primary navigation"
-            className="flex flex-wrap gap-1"
-          >
-            <Link
-              href="/products"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-              })}
-            >
-              Products
-            </Link>
-
-            <Link
-              href="/wishlist"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-              })}
-            >
-              Wishlist
-            </Link>
-
-            <Link
-              href="/cart"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-              })}
-            >
-              Cart
-            </Link>
-
-            <Link
-              href="/login"
-              className={buttonVariants({
-                variant:
-                  "outline",
-                size: "sm",
-              })}
-            >
-              Account
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <HomeHeader />
 
       <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <section className="grid items-center gap-10 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">
@@ -185,6 +132,7 @@ export default function Home() {
           )}
         </nav>
 
+        <FeaturedProducts />
         <HomeRecommendations />
       </div>
 

@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShopSphere AI
 
-## Getting Started
+ShopSphere AI is a frontend-only personalized e-commerce application built with Next.js, React, TypeScript, Tailwind CSS, Zustand, TanStack Query, Vitest, and Playwright.
 
-First, run the development server:
+## Features
+
+- Product discovery with search, filters, sorting, pagination, and comparison
+- Product detail pages with stock-aware purchase controls
+- Persistent cart and wishlist
+- Six-step simulated checkout
+- Local order history and tracking
+- Reviews with sorting, rating distribution, voting, and local-order-derived Verified Purchase
+- Nine explainable recommendation strategies
+- Rule-Based / Mock AI Shopping Assistant with conversational refinement
+- Admin catalogue, order management, and Local Analytics
+
+## Stack
+
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS
+- Zustand for local/client state
+- TanStack Query for remote/cache state
+- DummyJSON for product data
+- Vitest + React Testing Library
+- Playwright
+
+No paid API, LLM provider, backend, database, or payment gateway is required.
+
+## Setup
+
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+## Environment
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com
+NEXT_PUBLIC_USE_LOCAL_MOCKS=true
+NEXT_PUBLIC_ENABLE_LOCAL_ANALYTICS=true
+```
+
+No secrets or API keys are required.
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
+npm test
+npm run test:e2e
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo Accounts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Customer: `customer@shopsphere.dev` / `Customer123!`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Admin: `admin@shopsphere.dev` / `Admin123!`
 
-## Learn More
+These are local development fixtures only.
 
-To learn more about Next.js, take a look at the following resources:
+## Recommendation Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`UI -> useRecommendations() -> Recommendation Service -> Recommendation Provider -> Mock Recommendation Engine -> DummyJSON + local signals`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Personalized scoring weights:
 
-## Deploy on Vercel
+| Signal | Weight |
+| --- | ---: |
+| Category match | 0.22 |
+| Price similarity | 0.15 |
+| Tag overlap | 0.18 |
+| Normalized rating | 0.15 |
+| Recently viewed relation | 0.10 |
+| Wishlist relation | 0.10 |
+| Cart relation | 0.10 |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Each component is normalized to 0-1 before weighting.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Implemented strategies:
+
+1. Recently Viewed
+2. Similar Products
+3. Category-Based
+4. Price-Based
+5. Wishlist-Based
+6. Cart-Based
+7. Frequently Bought Together
+8. Trending Products
+9. Personalized For You
+
+## AI Shopping Assistant
+
+The assistant is intentionally a **Rule-Based / Mock AI system**, not a real LLM. It parses structured shopping intent such as category, price, rating, and supported color keywords, then reuses existing product and recommendation services for results and similarity refinement.
+
+## Persistence
+
+Browser storage is used for development-stage persistence for authentication, cart, wishlist, checkout, orders, reviews, recommendation signals/analytics, admin simulations, and assistant session history.
+
+## Documentation
+
+- `docs/ARCHITECTURE.md`
+- `docs/API_INTEGRATION.md`
+- `docs/TESTING_REPORT.md`
+- `docs/TECHNICAL_REPORT.md`
+
+## Release Gate
+
+```bash
+npm run lint
+npm test
+npm run build
+npm run test:e2e
+```
+
+The production deployment should be functionally equivalent to the verified local build.

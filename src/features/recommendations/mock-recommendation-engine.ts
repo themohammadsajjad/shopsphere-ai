@@ -5,6 +5,7 @@ import {
   relationScore,
   tagOverlap,
 } from "@/features/recommendations/scoring";
+import recommendationSeeds from "@/lib/mock-data/recommendations.json";
 import type { Product } from "@/types/product";
 import type {
   RecommendationContext,
@@ -125,6 +126,54 @@ function dominantCategory(
   )[0]?.[0];
 }
 
+type RecommendationSeedData = {
+  frequentlyBoughtTogether: Array<{
+    seedProductId: number;
+    pairedProductIds: number[];
+  }>;
+  trending: Array<{
+    productId: number;
+    score: number;
+  }>;
+};
+
+const seedData =
+  recommendationSeeds as RecommendationSeedData;
+
+function fixturePairScore(
+  seedProductId: number,
+  productId: number,
+) {
+  const fixture =
+    seedData.frequentlyBoughtTogether.find(
+      (item) =>
+        item.seedProductId === seedProductId,
+    );
+
+  if (!fixture) {
+    return 0;
+  }
+
+  const index =
+    fixture.pairedProductIds.indexOf(productId);
+
+  if (index < 0) {
+    return 0;
+  }
+
+  return 1 - index / (fixture.pairedProductIds.length + 1);
+}
+
+function fixtureTrendScore(
+  productId: number,
+) {
+  return (
+    seedData.trending.find(
+      (item) => item.productId === productId,
+    )?.score ?? 0
+  );
+}
+
 function popularityScore(
   product: Product,
 ) {
@@ -144,9 +193,13 @@ function popularityScore(
     normalizedRating(
       product,
     ) *
-      0.6 +
-    discount * 0.2 +
-    mockVelocity * 0.2
+      0.5 +
+    discount * 0.15 +
+    fixtureTrendScore(
+      product.id,
+    ) *
+      0.25 +
+    mockVelocity * 0.1
   );
 }
 
@@ -492,7 +545,7 @@ export function runRecommendationStrategy(
       strategy,
       title:
         "Frequently Bought Together",
-      reason: `Mock co-occurrence around ${seed.title}, favoring complementary tags and strong ratings.`,
+      reason: `Local mock co-occurrence around ${seed.title}, combined with complementary tags and ratings.`,
       products: take(
         sortByScore(
           candidates,
@@ -510,19 +563,26 @@ export function runRecommendationStrategy(
                 ? 1
                 : 0;
 
+            const seededPair =
+              fixturePairScore(
+                seed.id,
+                product.id,
+              );
+
             return (
+              seededPair * 0.35 +
               tagOverlap(
                 product,
                 [seed],
               ) *
-                0.4 +
+                0.25 +
               normalizedRating(
                 product,
               ) *
-                0.25 +
-              mockPair * 0.2 +
+                0.2 +
+              mockPair * 0.1 +
               complementary *
-                0.15
+                0.1
             );
           },
         ),

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { AiAssistant } from "@/features/ai-assistant/ai-assistant";
+import { LazyAiAssistant } from "@/features/ai-assistant/lazy-ai-assistant";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Providers>
           {children}
-          <AiAssistant />
+          <LazyAiAssistant />
         </Providers>
       </body>
     </html>

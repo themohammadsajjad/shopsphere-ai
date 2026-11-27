@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { AdminDashboard } from "@/features/admin/admin-dashboard";
+import { LazyAdminDashboard } from "@/features/admin/lazy-admin-dashboard";
 import { AuthenticatedShell } from "@/features/auth/authenticated-shell";
 import { ProtectedRoute } from "@/features/auth/protected-route";
 
@@ -18,7 +18,7 @@ export default function AdminPage() {
         title="Admin dashboard"
         description="Manage local simulated catalogue and order operations, and monitor recommendation analytics."
       >
-        <AdminDashboard />
+        <LazyAdminDashboard />
       </AuthenticatedShell>
     </ProtectedRoute>
   );

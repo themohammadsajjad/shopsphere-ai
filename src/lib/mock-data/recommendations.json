@@ -1,1 +1,58 @@
-[]
+{
+  "frequentlyBoughtTogether": [
+    {
+      "seedProductId": 1,
+      "pairedProductIds": [
+        2,
+        3,
+        6
+      ]
+    },
+    {
+      "seedProductId": 2,
+      "pairedProductIds": [
+        1,
+        5,
+        7
+      ]
+    },
+    {
+      "seedProductId": 4,
+      "pairedProductIds": [
+        5,
+        8,
+        9
+      ]
+    },
+    {
+      "seedProductId": 5,
+      "pairedProductIds": [
+        4,
+        10,
+        6
+      ]
+    }
+  ],
+  "trending": [
+    {
+      "productId": 1,
+      "score": 0.92
+    },
+    {
+      "productId": 4,
+      "score": 0.88
+    },
+    {
+      "productId": 5,
+      "score": 0.84
+    },
+    {
+      "productId": 2,
+      "score": 0.79
+    },
+    {
+      "productId": 6,
+      "score": 0.74
+    }
+  ]
+}

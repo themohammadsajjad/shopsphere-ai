@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "seed-review-1",
+    "productId": 1,
+    "rating": 5,
+    "comment": "Excellent quality and a very good overall experience.",
+    "createdAt": "2026-11-10T10:00:00.000Z",
+    "reviewerName": "Demo Customer",
+    "reviewerEmail": "customer@shopsphere.dev",
+    "verifiedPurchase": true,
+    "helpful": 8,
+    "notHelpful": 1
+  },
+  {
+    "id": "seed-review-2",
+    "productId": 2,
+    "rating": 4,
+    "comment": "Good product for the price and easy to use every day.",
+    "createdAt": "2026-11-12T10:00:00.000Z",
+    "reviewerName": "Sample Shopper",
+    "reviewerEmail": "shopper@example.com",
+    "verifiedPurchase": false,
+    "helpful": 3,
+    "notHelpful": 0
+  }
+]

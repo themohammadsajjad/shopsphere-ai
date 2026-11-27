@@ -1,1 +1,368 @@
-[]
+[
+  {
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "expectedDeliveryDate": "2026-11-07T10:00:00.000Z",
+    "items": [
+      {
+        "id": "1:default",
+        "productId": 1,
+        "title": "Sample Product",
+        "price": 3320,
+        "thumbnail": "/file.svg",
+        "quantity": 1,
+        "stock": 10
+      }
+    ],
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9999999999"
+    },
+    "address": {
+      "line1": "Demo Street",
+      "line2": "",
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "pinCode": "141001"
+    },
+    "deliveryMethod": {
+      "id": "standard",
+      "label": "Standard Delivery",
+      "description": "4\u20136 business days",
+      "cost": 0,
+      "etaMinDays": 4,
+      "etaMaxDays": 6
+    },
+    "paymentMethod": "mock-cod",
+    "totals": {
+      "subtotal": 3320,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 166,
+      "total": 3486
+    },
+    "id": "SS-SEED-001",
+    "status": "Order Placed",
+    "statusHistory": [
+      {
+        "status": "Order Placed",
+        "timestamp": "2026-11-01T10:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "expectedDeliveryDate": "2026-11-07T10:00:00.000Z",
+    "items": [
+      {
+        "id": "1:default",
+        "productId": 1,
+        "title": "Sample Product",
+        "price": 3320,
+        "thumbnail": "/file.svg",
+        "quantity": 1,
+        "stock": 10
+      }
+    ],
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9999999999"
+    },
+    "address": {
+      "line1": "Demo Street",
+      "line2": "",
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "pinCode": "141001"
+    },
+    "deliveryMethod": {
+      "id": "standard",
+      "label": "Standard Delivery",
+      "description": "4\u20136 business days",
+      "cost": 0,
+      "etaMinDays": 4,
+      "etaMaxDays": 6
+    },
+    "paymentMethod": "mock-cod",
+    "totals": {
+      "subtotal": 3320,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 166,
+      "total": 3486
+    },
+    "id": "SS-SEED-002",
+    "status": "Confirmed",
+    "statusHistory": [
+      {
+        "status": "Order Placed",
+        "timestamp": "2026-11-01T10:00:00.000Z"
+      },
+      {
+        "status": "Confirmed",
+        "timestamp": "2026-11-02T10:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "expectedDeliveryDate": "2026-11-07T10:00:00.000Z",
+    "items": [
+      {
+        "id": "1:default",
+        "productId": 1,
+        "title": "Sample Product",
+        "price": 3320,
+        "thumbnail": "/file.svg",
+        "quantity": 1,
+        "stock": 10
+      }
+    ],
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9999999999"
+    },
+    "address": {
+      "line1": "Demo Street",
+      "line2": "",
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "pinCode": "141001"
+    },
+    "deliveryMethod": {
+      "id": "standard",
+      "label": "Standard Delivery",
+      "description": "4\u20136 business days",
+      "cost": 0,
+      "etaMinDays": 4,
+      "etaMaxDays": 6
+    },
+    "paymentMethod": "mock-cod",
+    "totals": {
+      "subtotal": 3320,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 166,
+      "total": 3486
+    },
+    "id": "SS-SEED-003",
+    "status": "Packed",
+    "statusHistory": [
+      {
+        "status": "Order Placed",
+        "timestamp": "2026-11-01T10:00:00.000Z"
+      },
+      {
+        "status": "Confirmed",
+        "timestamp": "2026-11-02T10:00:00.000Z"
+      },
+      {
+        "status": "Packed",
+        "timestamp": "2026-11-03T10:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "expectedDeliveryDate": "2026-11-07T10:00:00.000Z",
+    "items": [
+      {
+        "id": "1:default",
+        "productId": 1,
+        "title": "Sample Product",
+        "price": 3320,
+        "thumbnail": "/file.svg",
+        "quantity": 1,
+        "stock": 10
+      }
+    ],
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9999999999"
+    },
+    "address": {
+      "line1": "Demo Street",
+      "line2": "",
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "pinCode": "141001"
+    },
+    "deliveryMethod": {
+      "id": "standard",
+      "label": "Standard Delivery",
+      "description": "4\u20136 business days",
+      "cost": 0,
+      "etaMinDays": 4,
+      "etaMaxDays": 6
+    },
+    "paymentMethod": "mock-cod",
+    "totals": {
+      "subtotal": 3320,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 166,
+      "total": 3486
+    },
+    "id": "SS-SEED-004",
+    "status": "Shipped",
+    "statusHistory": [
+      {
+        "status": "Order Placed",
+        "timestamp": "2026-11-01T10:00:00.000Z"
+      },
+      {
+        "status": "Confirmed",
+        "timestamp": "2026-11-02T10:00:00.000Z"
+      },
+      {
+        "status": "Packed",
+        "timestamp": "2026-11-03T10:00:00.000Z"
+      },
+      {
+        "status": "Shipped",
+        "timestamp": "2026-11-04T10:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "expectedDeliveryDate": "2026-11-07T10:00:00.000Z",
+    "items": [
+      {
+        "id": "1:default",
+        "productId": 1,
+        "title": "Sample Product",
+        "price": 3320,
+        "thumbnail": "/file.svg",
+        "quantity": 1,
+        "stock": 10
+      }
+    ],
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9999999999"
+    },
+    "address": {
+      "line1": "Demo Street",
+      "line2": "",
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "pinCode": "141001"
+    },
+    "deliveryMethod": {
+      "id": "standard",
+      "label": "Standard Delivery",
+      "description": "4\u20136 business days",
+      "cost": 0,
+      "etaMinDays": 4,
+      "etaMaxDays": 6
+    },
+    "paymentMethod": "mock-cod",
+    "totals": {
+      "subtotal": 3320,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 166,
+      "total": 3486
+    },
+    "id": "SS-SEED-005",
+    "status": "Out for Delivery",
+    "statusHistory": [
+      {
+        "status": "Order Placed",
+        "timestamp": "2026-11-01T10:00:00.000Z"
+      },
+      {
+        "status": "Confirmed",
+        "timestamp": "2026-11-02T10:00:00.000Z"
+      },
+      {
+        "status": "Packed",
+        "timestamp": "2026-11-03T10:00:00.000Z"
+      },
+      {
+        "status": "Shipped",
+        "timestamp": "2026-11-04T10:00:00.000Z"
+      },
+      {
+        "status": "Out for Delivery",
+        "timestamp": "2026-11-05T10:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "expectedDeliveryDate": "2026-11-07T10:00:00.000Z",
+    "items": [
+      {
+        "id": "1:default",
+        "productId": 1,
+        "title": "Sample Product",
+        "price": 3320,
+        "thumbnail": "/file.svg",
+        "quantity": 1,
+        "stock": 10
+      }
+    ],
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9999999999"
+    },
+    "address": {
+      "line1": "Demo Street",
+      "line2": "",
+      "city": "Ludhiana",
+      "state": "Punjab",
+      "pinCode": "141001"
+    },
+    "deliveryMethod": {
+      "id": "standard",
+      "label": "Standard Delivery",
+      "description": "4\u20136 business days",
+      "cost": 0,
+      "etaMinDays": 4,
+      "etaMaxDays": 6
+    },
+    "paymentMethod": "mock-cod",
+    "totals": {
+      "subtotal": 3320,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 166,
+      "total": 3486
+    },
+    "id": "SS-SEED-006",
+    "status": "Delivered",
+    "statusHistory": [
+      {
+        "status": "Order Placed",
+        "timestamp": "2026-11-01T10:00:00.000Z"
+      },
+      {
+        "status": "Confirmed",
+        "timestamp": "2026-11-02T10:00:00.000Z"
+      },
+      {
+        "status": "Packed",
+        "timestamp": "2026-11-03T10:00:00.000Z"
+      },
+      {
+        "status": "Shipped",
+        "timestamp": "2026-11-04T10:00:00.000Z"
+      },
+      {
+        "status": "Out for Delivery",
+        "timestamp": "2026-11-05T10:00:00.000Z"
+      },
+      {
+        "status": "Delivered",
+        "timestamp": "2026-11-06T10:00:00.000Z"
+      }
+    ]
+  }
+]

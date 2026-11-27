@@ -1,1 +1,18 @@
-{}
+{
+  "scope": "Local Analytics",
+  "impressions": {
+    "trending": 24,
+    "similar-products": 18,
+    "personalized": 16
+  },
+  "clicks": {
+    "trending": 5,
+    "similar-products": 6,
+    "personalized": 4
+  },
+  "conversions": {
+    "trending": 2,
+    "similar-products": 2,
+    "personalized": 1
+  }
+}
