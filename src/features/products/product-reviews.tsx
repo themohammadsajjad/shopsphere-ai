@@ -29,6 +29,7 @@ import type {
 
 type ProductReviewsProps = {
   productId: number;
+  productTitle: string;
   rating: number;
   reviews:
     ProductReview[];
@@ -36,6 +37,7 @@ type ProductReviewsProps = {
 
 export function ProductReviews({
   productId,
+  productTitle,
   rating,
   reviews,
 }: ProductReviewsProps) {
@@ -264,7 +266,11 @@ export function ProductReviews({
           </h2>
 
           <p className="mt-1 text-sm text-muted-foreground">
-            Verified Purchase is
+            Reviews for{" "}
+            <span className="font-medium text-foreground">
+              {productTitle}
+            </span>
+            . Verified Purchase is
             derived from local
             ShopSphere order history.
           </p>

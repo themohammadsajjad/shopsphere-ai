@@ -175,6 +175,7 @@ export function ProductDetail({
 
       <ProductReviews
         productId={product.id}
+        productTitle={product.title}
         rating={product.rating}
         reviews={product.reviews}
       />

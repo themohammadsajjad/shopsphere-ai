@@ -93,6 +93,16 @@ describe("product variants", () => {
     ).toBe(true);
   });
 
+  it("does not treat laptops as clothing tops", () => {
+    expect(
+      getProductVariants(
+        createProduct({
+          category: "laptops",
+        }),
+      ),
+    ).toEqual([]);
+  });
+
   it("does not create variants for unsupported categories", () => {
     expect(
       getProductVariants(

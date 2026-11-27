@@ -125,10 +125,25 @@ describe("review utilities", () => {
         {},
       );
 
-    expect(
+    const distribution =
       getRatingDistribution(
         combined,
-      ),
+      );
+
+    expect(
+      distribution,
     ).toHaveLength(5);
+
+    expect(
+      distribution.map(
+        (item) => item.star,
+      ),
+    ).toEqual([
+      1,
+      2,
+      3,
+      4,
+      5,
+    ]);
   });
 });

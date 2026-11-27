@@ -42,10 +42,17 @@ export function getProductVariants(
     );
   }
 
+  const clothingSizeCategories =
+    new Set([
+      "mens-shirts",
+      "womens-dresses",
+      "tops",
+    ]);
+
   if (
-    category.includes("shirts") ||
-    category.includes("tops") ||
-    category.includes("dresses")
+    clothingSizeCategories.has(
+      category,
+    )
   ) {
     return createVariants(
       ["S", "M", "L", "XL"],
