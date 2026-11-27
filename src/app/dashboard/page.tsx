@@ -4,6 +4,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { AuthenticatedShell } from "@/features/auth/authenticated-shell";
 import { ProtectedRoute } from "@/features/auth/protected-route";
+import { RecommendationPreferences } from "@/features/recommendations/recommendation-preferences";
 
 export const metadata: Metadata = {
   title: "Dashboard | ShopSphere AI",
@@ -66,20 +67,7 @@ export default function DashboardPage() {
             </Link>
           </article>
 
-          <article className="glass-panel rounded-3xl border p-6 md:col-span-2 xl:col-span-1">
-            <p className="text-sm font-medium text-muted-foreground">
-              Personalization
-            </p>
-
-            <h2 className="mt-2 text-xl font-semibold">
-              Recommendations ahead
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Personalized product recommendations will appear here as
-              the recommendation module is completed.
-            </p>
-          </article>
+          <RecommendationPreferences />
         </section>
       </AuthenticatedShell>
     </ProtectedRoute>

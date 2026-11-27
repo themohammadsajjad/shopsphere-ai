@@ -1,98 +1,205 @@
+import Link from "next/link";
+
+import { buttonVariants } from "@/components/ui/button";
+import { HomeRecommendations } from "@/features/recommendations/home-recommendations";
+
+const categories = [
+  {
+    label: "Beauty",
+    slug: "beauty",
+  },
+  {
+    label: "Shoes",
+    slug: "mens-shoes",
+  },
+  {
+    label: "Smartphones",
+    slug: "smartphones",
+  },
+  {
+    label: "Laptops",
+    slug: "laptops",
+  },
+];
+
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen flex-1 items-center overflow-hidden px-6 py-16 sm:px-10 lg:px-16">
-      <div
-        className="shopsphere-grid pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      />
-
-      <div
-        className="glow-orb pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-cyan-300/30"
-        aria-hidden="true"
-      />
-      <div
-        className="glow-orb pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-400/25"
-        aria-hidden="true"
-      />
-
-      <section className="relative mx-auto grid w-full max-w-6xl items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="max-w-2xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-background/70 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur">
-            <span
-              className="h-2 w-2 rounded-full bg-emerald-500"
-              aria-hidden="true"
-            />
-            Frontend foundation ready
-          </div>
-
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.24em] text-primary">
-            Personalized shopping, powered by intelligence
-          </p>
-
-          <h1 className="text-balance text-5xl font-semibold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
-            ShopSphere
-            <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-violet-600 bg-clip-text text-transparent">
-              {" "}
-              AI
-            </span>
-          </h1>
-
-          <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-            A modern commerce experience built around transparent
-            recommendations, smarter discovery, and a shopping journey that
-            adapts to real customer signals.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3 text-sm text-muted-foreground">
-            <span className="rounded-full border bg-card/70 px-3 py-1.5">
-              Next.js + TypeScript
-            </span>
-            <span className="rounded-full border bg-card/70 px-3 py-1.5">
-              Recommendation-ready
-            </span>
-            <span className="rounded-full border bg-card/70 px-3 py-1.5">
-              Frontend-only architecture
-            </span>
-          </div>
-        </div>
-
-        <div className="depth-scene relative mx-auto w-full max-w-md">
-          <div
-            className="depth-card glass-panel relative overflow-hidden rounded-[2rem] p-7"
-            aria-hidden="true"
+    <main className="shopsphere-grid min-h-screen">
+      <header className="border-b bg-background/80 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            className="mr-auto text-lg font-semibold"
           >
-            <div className="absolute right-6 top-6 h-20 w-20 rounded-full bg-cyan-400/20 blur-2xl" />
+            ShopSphere AI
+          </Link>
 
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <div className="h-2.5 w-24 rounded-full bg-foreground/10" />
-                <div className="mt-3 h-2 w-16 rounded-full bg-foreground/5" />
-              </div>
-              <div className="h-10 w-10 rounded-2xl bg-primary/15" />
-            </div>
+          <nav
+            aria-label="Primary navigation"
+            className="flex flex-wrap gap-1"
+          >
+            <Link
+              href="/products"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })}
+            >
+              Products
+            </Link>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-3xl border bg-background/60 p-4 shadow-sm">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-cyan-200/80 to-blue-300/40" />
-                <div className="mt-4 h-2.5 w-3/4 rounded-full bg-foreground/10" />
-                <div className="mt-2 h-2 w-1/2 rounded-full bg-foreground/5" />
-              </div>
+            <Link
+              href="/wishlist"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })}
+            >
+              Wishlist
+            </Link>
 
-              <div className="mt-7 rounded-3xl border bg-background/60 p-4 shadow-sm">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-violet-200/80 to-fuchsia-300/40" />
-                <div className="mt-4 h-2.5 w-2/3 rounded-full bg-foreground/10" />
-                <div className="mt-2 h-2 w-1/2 rounded-full bg-foreground/5" />
-              </div>
-            </div>
+            <Link
+              href="/cart"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })}
+            >
+              Cart
+            </Link>
 
-            <div className="mt-5 rounded-2xl border bg-primary/8 p-4">
-              <div className="h-2.5 w-32 rounded-full bg-primary/25" />
-              <div className="mt-3 h-2 w-full rounded-full bg-foreground/5" />
-              <div className="mt-2 h-2 w-4/5 rounded-full bg-foreground/5" />
+            <Link
+              href="/login"
+              className={buttonVariants({
+                variant:
+                  "outline",
+                size: "sm",
+              })}
+            >
+              Account
+            </Link>
+          </nav>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        <section className="grid items-center gap-10 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">
+              Personalized
+              shopping, powered by
+              intelligence
+            </p>
+
+            <h1 className="mt-4 max-w-3xl text-5xl font-semibold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+              Find products that
+              make sense for{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-violet-600 bg-clip-text text-transparent">
+                you
+              </span>
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+              Browse a multi-category
+              storefront with
+              explainable
+              recommendations shaped
+              by what you view, save,
+              search, and buy.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/products"
+                className={buttonVariants({
+                  size: "lg",
+                })}
+              >
+                Shop products
+              </Link>
+
+              <Link
+                href="/dashboard"
+                className={buttonVariants({
+                  size: "lg",
+                  variant:
+                    "outline",
+                })}
+              >
+                View personalization
+              </Link>
             </div>
           </div>
+
+          <div className="glass-panel rounded-[2rem] border p-6 sm:p-8">
+            <p className="text-sm font-medium text-muted-foreground">
+              How recommendations
+              work
+            </p>
+
+            <h2 className="mt-2 text-2xl font-semibold">
+              Transparent signals,
+              not random products
+            </h2>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {[
+                "Recent views",
+                "Search history",
+                "Price range",
+                "Wishlist",
+                "Cart",
+                "Order history",
+              ].map(
+                (signal) => (
+                  <div
+                    key={signal}
+                    className="rounded-2xl border bg-background/60 p-4 text-sm font-medium"
+                  >
+                    {signal}
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </section>
+
+        <nav
+          aria-label="Categories"
+          className="mb-12 flex flex-wrap gap-2 border-y py-5"
+        >
+          {categories.map(
+            (category) => (
+              <Link
+                key={
+                  category.slug
+                }
+                href={`/products?category=${category.slug}`}
+                className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-muted"
+              >
+                {
+                  category.label
+                }
+              </Link>
+            ),
+          )}
+        </nav>
+
+        <HomeRecommendations />
+      </div>
+
+      <footer className="border-t">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-8 text-sm text-muted-foreground sm:px-6 lg:px-8">
+          <p className="font-medium text-foreground">
+            ShopSphere AI
+          </p>
+          <p>
+            Frontend-only simulated
+            commerce and explainable
+            personalization.
+          </p>
         </div>
-      </section>
+      </footer>
     </main>
   );
 }

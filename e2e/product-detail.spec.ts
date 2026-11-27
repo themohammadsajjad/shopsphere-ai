@@ -75,6 +75,80 @@ test(
       },
     );
 
+    const recommendationProducts = [
+      product,
+      {
+        ...product,
+        id: 2,
+        title: "Stride Tempo Runner",
+        price: 42,
+        rating: 4.7,
+        sku: "STRIDE-002",
+        tags: [
+          "running",
+          "shoes",
+        ],
+      },
+      {
+        ...product,
+        id: 3,
+        title: "Stride Running Backpack",
+        category: "mens-bags",
+        price: 38,
+        rating: 4.5,
+        sku: "STRIDE-003",
+        tags: [
+          "running",
+          "travel",
+        ],
+      },
+      {
+        ...product,
+        id: 4,
+        title: "Stride Sports Watch",
+        category: "mens-watches",
+        price: 55,
+        rating: 4.8,
+        sku: "STRIDE-004",
+        tags: [
+          "sport",
+          "wearable",
+        ],
+      },
+      {
+        ...product,
+        id: 5,
+        title: "Stride Wireless Audio",
+        category: "mobile-accessories",
+        price: 48,
+        rating: 4.6,
+        sku: "STRIDE-005",
+        tags: [
+          "audio",
+          "sport",
+        ],
+      },
+    ];
+
+    await page.route(
+      /https:\/\/dummyjson\.com\/products\?.*/,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType:
+            "application/json",
+          body: JSON.stringify({
+            products:
+              recommendationProducts,
+            total:
+              recommendationProducts.length,
+            skip: 0,
+            limit: 200,
+          }),
+        });
+      },
+    );
+
     await page.goto(
       "/products/1",
     );

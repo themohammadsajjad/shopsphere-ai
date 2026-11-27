@@ -18,6 +18,7 @@ import {
 import { useCartStore } from "@/store/cart-store";
 import { useWishlistStore } from "@/store/wishlist-store";
 import { formatInr } from "@/utils/currency";
+import { RecommendationRail } from "@/features/recommendations/recommendation-rail";
 
 export function WishlistView() {
   const productIds =
@@ -287,30 +288,9 @@ export function WishlistView() {
         )}
       </div>
 
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold">
-          Because of your Wishlist
-        </h2>
-
-        <p className="mt-1 text-sm text-muted-foreground">
-          Wishlist-derived
-          recommendations will
-          appear here when the
-          recommendation engine is
-          connected.
-        </p>
-
-        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {Array.from({
-            length: 4,
-          }).map((_, index) => (
-            <div
-              key={index}
-              className="glass-panel aspect-[0.9] animate-pulse rounded-2xl border bg-muted/30"
-            />
-          ))}
-        </div>
-      </section>
+      <div className="mt-10">
+        <RecommendationRail strategy="wishlist-based" />
+      </div>
     </div>
   );
 }

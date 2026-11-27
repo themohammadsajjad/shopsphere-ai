@@ -7,7 +7,8 @@ import { DeliveryEstimate } from "@/features/products/delivery-estimate";
 import { ProductGallery } from "@/features/products/product-gallery";
 import { ProductInfoTabs } from "@/features/products/product-info-tabs";
 import { ProductPurchasePanel } from "@/features/products/product-purchase-panel";
-import { ProductRecommendationPlaceholders } from "@/features/products/product-recommendation-placeholders";
+import { ProductRecommendations } from "@/features/recommendations/product-recommendations";
+import { ProductViewTracker } from "@/features/recommendations/product-view-tracker";
 import { ProductReviews } from "@/features/products/product-reviews";
 import { useProductQuery } from "@/features/products/queries";
 import { ProductServiceError } from "@/services/product-service";
@@ -126,6 +127,7 @@ export function ProductDetail({
 
   return (
     <div className="space-y-10">
+      <ProductViewTracker product={product} />
       <nav
         aria-label="Breadcrumb"
         className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
@@ -176,7 +178,7 @@ export function ProductDetail({
         reviews={product.reviews}
       />
 
-      <ProductRecommendationPlaceholders />
+      <ProductRecommendations product={product} />
     </div>
   );
 }

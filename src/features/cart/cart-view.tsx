@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/button";
 import { calculateCartTotals } from "@/features/cart/cart-calculations";
 import { getProductVariants } from "@/features/products/product-variants";
+import { RecommendationRail } from "@/features/recommendations/recommendation-rail";
 import {
   ProductServiceError,
   getProductById,
@@ -857,30 +858,9 @@ export function CartView() {
 
       <SavedItems />
 
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold">
-          Recommended add-ons
-        </h2>
-
-        <p className="mt-1 text-sm text-muted-foreground">
-          Cart-based
-          recommendations will
-          appear here when the
-          recommendation engine is
-          connected.
-        </p>
-
-        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {Array.from({
-            length: 4,
-          }).map((_, index) => (
-            <div
-              key={index}
-              className="glass-panel aspect-[0.9] animate-pulse rounded-2xl border bg-muted/30"
-            />
-          ))}
-        </div>
-      </section>
+      <div className="mt-10">
+        <RecommendationRail strategy="cart-based" />
+      </div>
     </div>
   );
 }
