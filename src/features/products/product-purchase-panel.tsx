@@ -283,8 +283,10 @@ export function ProductPurchasePanel({
                     aria-pressed={
                       selected
                     }
-                    aria-disabled={
+                    data-unavailable={
                       outOfStock
+                        ? "true"
+                        : undefined
                     }
                     onClick={() =>
                       selectVariant(
