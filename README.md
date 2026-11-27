@@ -1,5 +1,7 @@
 # ShopSphere AI
 
+**Live Demo:** https://shopsphere-ai-kohl.vercel.app
+
 ShopSphere AI is a frontend-only personalized e-commerce application built with Next.js, React, TypeScript, Tailwind CSS, Zustand, TanStack Query, Vitest, and Playwright.
 
 ## Features
