@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { AuthenticatedShell } from "@/features/auth/authenticated-shell";
 import { ProtectedRoute } from "@/features/auth/protected-route";
 import { RecommendationPreferences } from "@/features/recommendations/recommendation-preferences";
+import { DashboardReviews } from "@/features/reviews/dashboard-reviews";
 
 export const metadata: Metadata = {
   title: "Dashboard | ShopSphere AI",
@@ -68,6 +69,7 @@ export default function DashboardPage() {
           </article>
 
           <RecommendationPreferences />
+          <DashboardReviews />
         </section>
       </AuthenticatedShell>
     </ProtectedRoute>

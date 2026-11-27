@@ -4,6 +4,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { getCartCoupon } from "@/features/cart/cart-coupons";
+import { useRecommendationAnalyticsStore } from "@/store/recommendation-analytics-store";
 import type {
   AddCartItemInput,
   CartCoupon,
@@ -73,7 +74,15 @@ export const useCartStore =
         items: [],
         savedItems: [],
 
-        addItem: (item) =>
+        addItem: (item) => {
+          if (item.stock > 0) {
+            useRecommendationAnalyticsStore
+              .getState()
+              .recordConversion(
+                item.productId,
+              );
+          }
+
           set((state) => {
             if (
               item.stock <= 0
@@ -136,7 +145,8 @@ export const useCartStore =
                 },
               ],
             };
-          }),
+          });
+        },
 
         removeItem: (id) =>
           set((state) => ({

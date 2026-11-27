@@ -16,12 +16,19 @@ type StrategyCounts =
 type RecommendationAnalyticsState = {
   impressions: StrategyCounts;
   clicks: StrategyCounts;
+  conversions: StrategyCounts;
+  clickedProducts: Record<number, RecommendationStrategy>;
   recordImpression: (
     strategy: RecommendationStrategy,
     count?: number,
   ) => void;
   recordClick: (
     strategy: RecommendationStrategy,
+    productId?: number,
+  ) => void;
+
+  recordConversion: (
+    productId: number,
   ) => void;
   resetAnalytics: () => void;
 };
@@ -32,6 +39,8 @@ export const useRecommendationAnalyticsStore =
       (set) => ({
         impressions: {},
         clicks: {},
+        conversions: {},
+        clickedProducts: {},
 
         recordImpression: (
           strategy,
@@ -51,6 +60,7 @@ export const useRecommendationAnalyticsStore =
 
         recordClick: (
           strategy,
+          productId,
         ) =>
           set((state) => ({
             clicks: {
@@ -60,12 +70,46 @@ export const useRecommendationAnalyticsStore =
                   strategy
                 ] ?? 0) + 1,
             },
+            clickedProducts:
+              productId ===
+              undefined
+                ? state.clickedProducts
+                : {
+                    ...state.clickedProducts,
+                    [productId]:
+                      strategy,
+                  },
           })),
+
+        recordConversion:
+          (productId) =>
+            set((state) => {
+              const strategy =
+                state.clickedProducts[
+                  productId
+                ];
+
+              if (!strategy) {
+                return state;
+              }
+
+              return {
+                conversions: {
+                  ...state.conversions,
+                  [strategy]:
+                    (state.conversions[
+                      strategy
+                    ] ?? 0) + 1,
+                },
+              };
+            }),
 
         resetAnalytics: () =>
           set({
             impressions: {},
             clicks: {},
+            conversions: {},
+            clickedProducts: {},
           }),
       }),
       {

@@ -128,6 +128,7 @@ export function RecommendationRail({
               onClickCapture={() =>
                 recordClick(
                   strategy,
+                  product.id,
                 )
               }
             >

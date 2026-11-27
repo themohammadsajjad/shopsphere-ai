@@ -174,6 +174,7 @@ export function ProductDetail({
       </div>
 
       <ProductReviews
+        productId={product.id}
         rating={product.rating}
         reviews={product.reviews}
       />
