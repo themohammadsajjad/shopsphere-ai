@@ -24,20 +24,31 @@ test(
       ),
     ).toBeVisible();
 
-    await expect(
+    const primaryNavigation =
       page.getByRole(
-        "link",
+        "navigation",
         {
-          name: /Wishlist/,
+          name:
+            "Primary navigation",
         },
-      ),
-     ).toBeVisible();
+      );
 
     await expect(
-      page.getByRole(
+      primaryNavigation.getByRole(
         "link",
         {
-          name: /Cart/,
+          name:
+            /Wishlist/,
+        },
+      ),
+    ).toBeVisible();
+
+    await expect(
+      primaryNavigation.getByRole(
+        "link",
+        {
+          name:
+            /Cart/,
         },
       ),
     ).toBeVisible();
