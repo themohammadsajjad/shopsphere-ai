@@ -72,7 +72,7 @@ export function ProductCard({
     product.stock <= 0;
 
   return (
-    <article className="glass-panel group overflow-hidden rounded-3xl border">
+    <article className="glass-panel group flex h-full flex-col overflow-hidden rounded-3xl border">
       <div className="relative aspect-square overflow-hidden bg-muted/40">
         <Image
           src={product.thumbnail}
@@ -117,7 +117,7 @@ export function ProductCard({
         </Button>
       </div>
 
-      <div className="space-y-3 p-3 sm:space-y-4 sm:p-5">
+      <div className="flex flex-1 flex-col space-y-3 p-3 sm:space-y-4 sm:p-5">
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:text-xs sm:tracking-[0.14em]">
             {formatCategory(
@@ -159,7 +159,7 @@ export function ProductCard({
           </p>
         </div>
 
-        <div className="border-t pt-3 sm:pt-4">
+        <div className="mt-auto border-t pt-3 sm:pt-4">
           {isOutOfStock ? (
             <p className="text-xs font-medium text-destructive sm:text-sm">
               Out of stock
