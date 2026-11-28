@@ -125,7 +125,7 @@ export function RecommendationRail({
           (product) => (
             <div
               key={product.id}
-              className="h-full"
+              className="flex min-w-0"
               onClickCapture={() =>
                 recordClick(
                   strategy,

@@ -72,7 +72,7 @@ export function ProductCard({
     product.stock <= 0;
 
   return (
-    <article className="glass-panel group flex h-full flex-col overflow-hidden rounded-3xl border">
+    <article className="glass-panel group flex h-full w-full flex-1 flex-col overflow-hidden rounded-3xl border">
       <div className="relative aspect-square overflow-hidden bg-muted/40">
         <Image
           src={product.thumbnail}
@@ -118,7 +118,7 @@ export function ProductCard({
       </div>
 
       <div className="flex flex-1 flex-col space-y-3 p-3 sm:space-y-4 sm:p-5">
-        <div>
+        <div className="min-h-[5.5rem] sm:min-h-[6.5rem]">
           <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:text-xs sm:tracking-[0.14em]">
             {formatCategory(
               product.category,
