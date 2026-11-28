@@ -106,9 +106,11 @@ export function RecommendationRail({
 
   return (
     <section
+      id={`recommendations-${strategy}`}
       aria-label={
         displayTitle
       }
+      className="scroll-mt-24"
     >
       <div className="mb-4">
         <h2 className="text-xl font-semibold sm:text-2xl">

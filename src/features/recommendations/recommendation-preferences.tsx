@@ -99,7 +99,10 @@ export function RecommendationPreferences() {
   }
 
   return (
-    <article className="glass-panel rounded-3xl border p-6 md:col-span-2 xl:col-span-3">
+    <article
+      id="recommendation-preferences"
+      className="glass-panel scroll-mt-24 rounded-3xl border p-6 md:col-span-2 xl:col-span-3"
+    >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-sm font-medium text-muted-foreground">

@@ -91,20 +91,48 @@ export default function Home() {
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
-                "Recent views",
-                "Search history",
-                "Price range",
-                "Wishlist",
-                "Cart",
-                "Order history",
+                {
+                  label: "Recent views",
+                  href: "#recommendations-recently-viewed",
+                },
+                {
+                  label: "Search history",
+                  href: "/dashboard#recommendation-preferences",
+                },
+                {
+                  label: "Price range",
+                  href: "#recommendations-price-based",
+                },
+                {
+                  label: "Wishlist",
+                  href: "/wishlist",
+                },
+                {
+                  label: "Cart",
+                  href: "/cart",
+                },
+                {
+                  label: "Order history",
+                  href: "/orders",
+                },
               ].map(
                 (signal) => (
-                  <div
-                    key={signal}
-                    className="rounded-2xl border bg-background/60 p-4 text-sm font-medium"
+                  <Link
+                    key={signal.label}
+                    href={signal.href}
+                    className="group flex items-center justify-between rounded-2xl border bg-background/60 p-4 text-sm font-medium transition hover:border-foreground/30 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    {signal}
-                  </div>
+                    <span>
+                      {signal.label}
+                    </span>
+
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </Link>
                 ),
               )}
             </div>
