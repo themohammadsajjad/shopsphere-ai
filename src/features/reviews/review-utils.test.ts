@@ -139,11 +139,11 @@ describe("review utilities", () => {
         (item) => item.star,
       ),
     ).toEqual([
-      1,
-      2,
-      3,
-      4,
       5,
+      4,
+      3,
+      2,
+      1,
     ]);
   });
 });

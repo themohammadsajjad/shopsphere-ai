@@ -199,11 +199,11 @@ export function getRatingDistribution(
     DisplayReview[],
 ) {
   return [
-    1,
-    2,
-    3,
-    4,
     5,
+    4,
+    3,
+    2,
+    1,
   ].map((star) => {
     const count =
       reviews.filter(
